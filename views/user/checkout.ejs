@@ -1,0 +1,578 @@
+<%- include('../partials/header') %>
+
+<main class="main">
+  <div
+    class="page-header text-center"
+    style="background-image: url('assets/images/page-header-bg.jpg')"
+  >
+    <div class="container">
+      <h3 class="page-title">checkout</h3>
+    </div>
+    <!-- End .container -->
+  </div>
+  <!-- End .page-header -->
+
+  <div class="page-content">
+    <div class="cart">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-9">
+            <a class="nav-link" id="tab-add-link" href="/profile"
+                        >Add New address<i class="icon-edit"></i
+                      ></a>
+            <table id="myTable" class="table table-cart table-mobile">
+              <% if (user.length > 0) { %>
+              <h3 class="card-title mt-2">Shipping Address</h3>
+              <!-- End .card-title -->
+              <% user.forEach(function(address) { %>
+              <tbody>
+                <tr>
+                  <td class="product-col">
+                    <input
+                      class="form-check-input mt-3 address"
+                      id="<%=address._id %>"
+                      type="radio"
+                      value="<%=address._id %>"
+                      name="customerAddress"
+                    />
+
+                    <p class="ml-5">
+                      <%= address.address1 %> , <%=address.address2%>
+                      <%=address.city%><br />
+                      <%=address.country%> , <%=address.landmark%> <br />
+                      <%=address.zipcode%>
+                      
+                    </p>
+                  </td>
+                </tr>
+
+                <% }); %>
+              </tbody>
+              <% } else { %>
+              <tbody>
+                <tr>
+                  <td class="product-col">
+                    <div class="product">
+                      <figure class="product-media">
+                        <a href="#"> </a>
+                      </figure>
+
+                      <p>No order has been made yet.</p>
+                      <a href="categorypage" class="btn btn-outline-primary-2"
+                        ><span>GO SHOP</span
+                        ><i class="icon-long-arrow-right"></i
+                      ></a>
+                    </div>
+                  </td>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+            <!-- End .table table-wishlist -->
+           <div  class="cart-bottom">
+              <div class="cart-discount">
+              <p class="text-dark">
+                  Apply coupon or offer to get
+                  <strong class="text-danger">Upto 100 RS Discount.</strong>
+                  
+                </p>
+		
+				<div id="accordion"  class="card ">
+					<div class="card-header" id="headingTwo">
+					  <h5 class="mb-0">
+						<button class="btn btn-link collapsed text-success" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+							click here
+						</button>
+					  </h5>
+					</div>
+				
+					<div id="collapseTwo" class="collapse " aria-labelledby="headingTwo" data-parent="#accordion">
+					
+					  <div class="card-body ">
+						<table class="table table-wishlist  table-mobile" style="width: 800px;">
+							<tbody>
+            <thead>
+              <tr>
+                <th>Description</th>
+                <th>Discount</th>
+                <th>minimum Amount</th>
+                <th>Exprie Date</th>
+                <th> Apply Code</th>
+              </tr>
+             </thead>
+
+                <% coupon.forEach(function(coupon) { %>
+								<tr>
+									<td class="product-col">
+										<div class="product">
+	
+											<h3 class="product-title">
+												<a href="#"><%=coupon.couponDescription%></a>
+											</h3>
+										</div>
+									</td>
+									
+									<td class="stock-col"><%=coupon.couponAmount%></td>
+									<td class="stock-col"><%=coupon.minimumAmount%></td>
+									<td class="stock-col"><%=new Date(coupon.expireDate).toLocaleDateString()%></td>
+									<td >
+                    <!-- <a  class="btn  btn-secondary"> -->
+                      <%=coupon.couponCode%>
+                    <!-- </a> -->
+									</td>
+									
+								</tr>
+                <% }); %>
+							</tbody>
+							
+							
+						</table>
+					  </div>
+					</div>	
+					
+				  </div>
+      
+               
+
+                <div class="input-group mt-2">
+                  <input type="text" id="coupon" class="form-control" />
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-primary-2 sub" type="button">
+                      <i class="icon-long-arrow-right"></i>
+                    </button>
+                  </div>
+                  <!-- .End .input-group-append -->
+                </div>
+                <!-- End .input-group -->
+              </div>
+              <!-- End .cart-discount -->
+            </div>
+            <!-- End .cart-bottom -->
+          </div>
+         
+          <% if (cart.length > 0) { %>
+          <aside class="col-lg-3">
+            <div class="summary summary-cart">
+              <h3 class="summary-title">Order Summary</h3>
+             
+
+              <table id="mytabel" class="table table-summary">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <% cart.forEach(function(product) { %> 
+                  <%product.product.forEach(function(product) { %>
+                   
+                  <tr>
+                    <td><%=product.product_id.productName%></td>
+                    <input type="hidden" class="category_id" value="<%=product.product_id.category_id%>">  
+                    <%let total;%>
+                    <%if(product.product_id.offerprice > 0) {%>
+                      <% total = product.product_id.offerprice * product.Cartquantity%>
+                  <%} else {%>
+                    <% total = product.product_id.price * product.Cartquantity%>
+                  <%}%>
+                    
+                    <td class="Rs"><%=total%></td>
+                  </tr> 
+
+                  <% }); %>
+                   <% }); %>
+                </tbody>
+              </table>
+              <table class="table table-summary">
+                <tbody>
+                  <tr class="summary-subtotal">
+                    <td>Subtotal:</td>
+                    <td id="subtotal"></td>
+                  </tr>
+                  <tr>
+                    <td>Coupon or Offer</td>
+                    <td><p id="dis">0</p></td>
+                  </tr>
+                  <tr class="summary-total">
+                    <td>Total:</td>
+                    <td id="finaltotal"></td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="accordion-summary" id="accordion-payment">
+                <div class="card">
+                  <div class="card-header" id="heading-1">
+                    
+                  </div>
+                  <div
+                    id="collapse-1"
+                    class="collapse show"
+                    aria-labelledby="heading-1"
+                    data-parent="#accordion-payment"
+                  >
+                    <div class="card-body"></div>
+                    <!-- End .card-body -->
+                  </div>
+                  <!-- End .card-header -->
+                </div>
+                <!-- End .card -->
+
+                <div class="card">
+                  <div class="card-header" id="heading-3">
+                    <h2 class="card-title">
+                      <a
+                        class="collapsed method"
+                        role="radio"
+                        data-method="COD"
+                        value="COD"
+                        data-toggle="collapse"
+                        href="#collapse-3"
+                        aria-expanded="false"
+                        aria-controls="collapse-3"
+                      >
+                        Cash on delivery
+                      </a>
+                    </h2>
+                  </div>
+                  <!-- End .card-header -->
+                  <div
+                    id="collapse-3"
+                    class="collapse"
+                    aria-labelledby="heading-3"
+                    data-parent="#accordion-payment"
+                  >
+                    <div class="card-body"></div>
+                    <!-- End .card-body -->
+                  </div>
+                </div>
+                <!-- End .card -->
+
+                <div class="card">
+                  <div class="card-header" id="heading-4">
+                    <h2 class="card-title">
+                      <a
+                        class="collapsed method"
+                        role="radio"
+                        data-method="Razorpay"
+                        value="Razorpay"
+                        data-toggle="collapse"
+                        href="#collapse-4"
+                        aria-expanded="false"
+                        aria-controls="collapse-4"
+                      >
+                        Razorpay
+                        <small class="float-right paypal-link"
+                          >What is Razorpay?</small
+                        >
+                      </a>
+                    </h2>
+                    <div
+                      id="collapse-4"
+                      class="collapse"
+                      aria-labelledby="heading-4"
+                      data-parent="#accordion-payment"
+                    >
+                      <div class="card-body"></div>
+                      <!-- End .card-body -->
+                    </div>
+                    <!-- End .collapse -->
+                  </div>
+                  <!-- End .card-header -->
+                </div>
+                <!-- End .card -->
+
+                <div class="card">
+                  <div class="card-header" id="heading-5">
+                    
+                  </div>
+                  <!-- End .card-header -->
+                  <div
+                    id="collapse-5"
+                    class="collapse"
+                    aria-labelledby="heading-5"
+                    data-parent="#accordion-payment"
+                  >
+                    <div class="card-body"></div>
+                    <!-- End .card-body -->
+                  </div>
+                </div>
+                <!-- End .card -->
+              </div>
+              <!-- End .accordion -->
+
+              <button type="submit"
+                 id="payment"
+                class="btn btn-outline-primary-2 btn-order btn-block"
+              >
+                <span>Place Order</span>
+              </button>
+            </div>
+            <!-- End .summary -->
+            <% } else { %>
+
+            <div
+              class="tab-pane fade"
+              id="tab-orders"
+              role="tabpanel"
+              aria-labelledby="tab-orders-link"
+            >
+              <p>No order has been made yet.</p>
+              <a href="categorypage" class="btn btn-outline-primary-2"
+                ><span>GO SHOP</span><i class="icon-long-arrow-right"></i
+              ></a>
+              <a
+                href="categorypage"
+                class="btn btn-outline-dark-2 btn-block mb-3"
+                ><span>CONTINUE SHOPPING</span><i class="icon-refresh"></i
+              ></a>
+            </div>
+            <!-- .End .tab-pane -->
+
+            <% } %>
+          </aside>
+          <!-- End .col-lg-3 -->
+        </div>
+        <!-- End .row -->
+      </div>
+      <!-- End .container -->
+    </div>
+    <!-- End .cart -->
+  </div>
+</main>
+
+<script
+  src="https://code.jquery.com/jquery-3.6.4.slim.js"
+  integrity="sha256-dWvV84T6BhzO4vG6gWhsWVKVoa4lVmLnpBOZh/CAHU4="
+  crossorigin="anonymous"
+></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  $(document).ready(function () {
+    update_amounts();
+
+    function update_amounts() {
+      let subtotal = 0;
+      $("#mytabel > tbody > tr").each(function () {
+        let price = $(this)
+          .find(".Rs")
+          .text()
+          .replace(/[^\d\.]/g, "");
+        let total = parseInt(price);
+          console.log(price);
+        subtotal += total;
+          console.log(subtotal);
+      });
+
+      let couponrs = 0;
+      let total = subtotal - couponrs;
+
+      $("#subtotal").text("₹" + subtotal.toFixed(2));
+
+      $("#finaltotal").text(total.toFixed(2));
+    }
+  });
+  // coupon validation 
+  $(document).ready(function() {
+  $(".sub").on("click", function () {
+    console.log("clicked");
+    var coupon = $("#coupon").val();
+    console.log(coupon);
+    $.ajax({
+      url: "/checkvalidcoupon?id=" + coupon,
+      method: "get",
+      success: function (response) {
+        if (response.message == "1") {
+          var couponAmount = response.coupon.couponAmount;
+          var minAmount = response.coupon.minimumAmount;
+          
+          var productTotal = parseFloat($("#subtotal").text().replace(/[^\d\.]/g, ""));
+          
+          if (productTotal >= minAmount) {
+            var total = productTotal - couponAmount;
+            $("#finaltotal").text(total);
+            $("#dis").text(response.coupon.couponAmount);
+            Swal.fire({
+              title: "Success",
+              text: "Coupon is Redeemed. Happy Shopping!",
+              icon: "success",
+              confirmButtonText: "OK"
+            });
+          } else {
+            Swal.fire({
+              title: "Error",
+              text: "Coupon only applies to purchases above $500.",
+              icon: "error",
+              confirmButtonText: "OK"
+            });
+          }
+        } else if (response.message == "0") {
+          Swal.fire({
+            title: "Error",
+            text: "Coupon only applies to selected categories.",
+            icon: "error",
+            confirmButtonText: "OK"
+          });
+        } else {
+          Swal.fire({
+            title: "Error",
+            text: response.message,
+            icon: "error",
+            confirmButtonText: "OK"
+          });
+        }
+      },
+      error: function () {
+        Swal.fire({
+          title: "Error",
+          text: "An error occurred while processing the request.",
+          icon: "error",
+          confirmButtonText: "OK"
+        });
+      }
+    });
+  }); // Add closing parentheses for the click event handler
+});
+
+$("#payment").on("click", function () {
+    var address = $("input[name=customerAddress]:checked").val();
+    if (!address) {
+        Swal.fire({
+            title: "Address",
+            text: "Address not selected",
+            icon: "error",
+            confirmButtonText: "OK",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                location.reload();
+            }
+        });
+    } else {
+        var paymentMethod = $('.accordion-summary .card-header .method[aria-expanded="true"]').data("method");
+        var purchase = $("#finaltotal").text().replace(/[^\d\.]/g, "");
+        var data = {
+            paymentmethod: paymentMethod,
+            total: purchase,
+            address: address,
+        };
+        console.log(data);
+        if (paymentMethod == 'Razorpay') {
+            $.ajax({
+                url: "/razorpay",
+                type: "POST",
+                data: { amount: purchase },
+                success: function (res) {
+                    if (res.success) {
+                        var options = {
+                            // Options for the Razorpay payment flow
+                            "key": "" + res.key_id + "",
+                            "amount": "" + res.amount + "",
+                            "currency": "INR",
+                            "image": "https://dummyimage.com/600x400/000/fff",
+                            "handler": function (response) {
+                                // Code executed when the payment is successful
+                                Swal.fire({
+                                    title: "Success",
+                                    text: "Order Success",
+                                    icon: "info",
+                                    confirmButtonText: "OK"
+                                }).then(function () {
+                                    saveOrder(); // Call the function to save the order
+                                });
+                            },
+                            "prefill": {
+                                "name": "" + res.name + "",
+                                "email": "" + res.email + ""
+                            },
+                            "notes": {
+                                "description": "Description"
+                            },
+                            "theme": {
+                                "color": "#2300a3"
+                            }
+                        };
+                        var razorpayObject = new Razorpay(options);
+
+                        razorpayObject.on("payment.failed", function (response) {
+                            // Code executed when the payment fails
+                            Swal.fire({
+                                title: "Payment Failed",
+                                text: "Order Not Placed",
+                                icon: "error",
+                                confirmButtonText: "OK"
+                            });
+                        });
+                        razorpayObject.open();
+                    } else {
+                        alert(res.msg);
+                    }
+                }
+            });
+        } else {
+            saveOrder();
+        }
+    }
+});
+
+function saveOrder() {
+    var address = $("input[name=customerAddress]:checked").val();
+    var paymentMethod = $('.accordion-summary .card-header .method[aria-expanded="true"]').data("method");
+    var purchase = $("#finaltotal").text().replace(/[^\d\.]/g, "");
+    var data = {
+        paymentmethod: paymentMethod,
+        total: purchase,
+        address: address,
+    };
+
+    $.ajax({
+        url: "/orderdetails",
+        method: "post",
+        data: data,
+        success: function (response) {
+            if (response.message == "1") {
+                Swal.fire({
+                    title: "Success",
+                    text: "Order placed successfully",
+                    icon: "success",
+                    confirmButtonText: "OK",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/profile";
+                    }
+                });
+            } else if (response.message == "0") {
+                stockOut(response.msg);
+            } else {
+                console.log('error');
+                Swal.fire({
+                    title: "Error",
+                    text: "Something went wrong. Please try again later.",
+                    icon: "error",
+                    confirmButtonText: "OK",
+                });
+            }
+        },
+    });
+}
+
+function stockOut(msg) {
+    Swal.fire({
+        title: "Stock Out",
+        text: msg,
+        icon: "info",
+        confirmButtonText: "OK"
+    });
+}
+
+
+  
+
+</script>
+
+<%- include('../partials/footer') %>

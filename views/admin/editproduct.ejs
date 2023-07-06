@@ -1,0 +1,266 @@
+<%-include("../partials/adheader.ejs")-%>
+<nav>
+    <ul class="menu-aside">
+        <li class="menu-item active">
+            <a class="menu-link" href="/admin/dashboard"> <i class="icon material-icons md-home"></i>
+                <span class="text">ADMIN HOME</span>
+            </a>
+        </li>
+        <li class="menu-item has-submenu ">
+            <a class="menu-link"> <i class="icon material-icons md-shopping_bag"></i>
+                <span class="text">Products</span>
+            </a>
+            <div class="submenu">
+                <a href="/admin/addproduct">Add Product</a>
+                <a href="/admin/productlist">Product List</a>
+
+
+            </div>
+            </li>
+        <li class="menu-item ">
+            <a class="menu-link" href="/admin/orders"> <i class="icon material-icons md-shopping_cart"></i>
+                <span class="text">Orders</span>
+            </a>
+
+        </li>
+        <li class="menu-item ">
+            <a class="menu-link" href="/admin/banner"> <i class="icon material-icons md-shopping_cart"></i>
+                <span class="text">Banner</span>
+            </a>
+
+        </li>
+        <li class="menu-item ">
+            <a class="menu-link" href="/admin/categorydisplay"> <i
+                    class="icon material-icons md-shopping_cart"></i>
+                <span class="text">Category</span>
+            </a>
+
+        </li>
+    </li>
+    <li class="menu-item has-submenu">
+        <a class="menu-link" href="#" ><i class="icon material-icons md-local_offer"></i>
+            <span class="text">Coupon</span>
+        </a>
+        <div class="submenu">
+            <a href="/admin/couponList">Coupon List</a>
+            <a href="/admin/addcoupon">Add Coupon</a>
+        </div>
+    </li>
+        <li class="menu-item has-submenu">
+            <a class="menu-link" href=""> <i class="icon material-icons md-store"></i>
+                <span class="text">Users</span>
+            </a>
+            <div class="submenu">
+                <a href="/admin/users">UserList</a>
+
+            </div>
+
+        </li>
+        
+
+        <li class="menu-item has-submenu">
+            <a class="menu-link" href="#"> <i class="icon material-icons md-person"></i>
+                <span class="text">Account</span>
+            </a>
+            <div class="submenu">
+                <a href="/admin">User login</a>
+                <a href="/admin/adregister">User registration</a>
+                <a href="/admin/error">Error 404</a>
+            </div>
+        </li>
+        <li class="menu-item has-submenu active">
+            <a class="menu-link" href="page-products-list.html"> <i class="icon material-icons md-shopping_bag"></i>
+                <span class="text">Offers</span>
+            </a>
+            <div class="submenu">
+                <a href="/admin/offer" class="active">Product Offer</a>
+                <!-- <a href="/admin/categoryOffer">Category Offer</a> -->
+            </div>
+        </li>
+
+
+
+    </ul>
+    <hr>
+    <ul class="menu-aside">
+        <li class="menu-item has-submenu">
+            <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
+                <span class="text">Settings</span>
+            </a>
+            <div class="submenu">
+                <a href="page-settings-1.html">Setting sample 1</a>
+                <a href="page-settings-2.html">Setting sample 2</a>
+            </div>
+        </li>
+
+    </ul>
+    <br>
+    <br>
+</nav>
+   
+   
+</aside>
+<main class="main-wrap">
+    <header class="main-header navbar">
+        <div class="col-search">
+           
+        </div>
+       
+                
+                
+                
+                <li class="dropdown nav-item">
+                    <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownAccount"
+                        ></a>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownAccount">
+                        <a class="dropdown-item" href="#"><i class="material-icons md-perm_identity"></i>Edit
+                            Profile</a>
+                        <a class="dropdown-item" href="#"><i class="material-icons md-settings"></i>Account
+                            Settings</a>
+                        <a class="dropdown-item" href="#"><i
+                                class="material-icons md-account_balance_wallet"></i>Wallet</a>
+                        <a class="dropdown-item" href="#"><i class="material-icons md-receipt"></i>Billing</a>
+                        <a class="dropdown-item" href="#"><i class="material-icons md-help_outline"></i>Help
+                            center</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-danger" href="/admin/logout"><i
+                                class="material-icons md-exit_to_app"></i>Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <body>
+        <style>
+            .square-image {
+                width: 70px;
+                height: 90px;
+                object-fit: fill;
+            }
+        </style>
+
+
+        <section class="content-main">
+            <form action="/admin/editproduct" method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-9">
+                        <div class="content-header">
+                            <h2 class="content-title">Edit Product</h2>
+                            <div>
+                                <button id="updateProductBtn" onclick="showNotification()"
+                                    class="btn btn-md rounded font-sm hover-up">Update</button>
+
+
+
+
+                                <!-- <button class="btn btn-md rounded font-sm hover-up">Publich</button> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <div class="mb-4">
+                                    <label for="product_title" class="form-label">Product title</label>
+                                    <input type="text" placeholder="<%= product.productName %>" class="form-control"
+                                        name="productName" id="productName" value="<%= product.productName %>" required>
+
+                                </div>
+                                <div class="row gx-3">
+                                    <div class="col-md-4  mb-3">
+                                        <label for="productQuantity" class="form-label">Quantity</label>
+                                        <input type="number" placeholder="<%= product.productQuantity %>"
+                                            class="form-control" name="productQuantity" id="productQuantity "
+                                            value="<%= product.productQuantity %>" min="0">
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div> <!-- card end// -->
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <div>
+                                    <label class="form-label">Description</label>
+                                    <input placeholder="<%= product.productDesc %>" class="form-control" rows="4"
+                                        name="productDes" name="productDescription"
+                                        value="<%= product.productDes %>" required></input>
+                                    <input type="hidden" class="form-control" name="id" id="floatingInputGrid"
+                                        placeholder="Name" value="<%= product._id %>">
+                                </div>
+                            </div>
+                        </div> <!-- card end// -->
+
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h4>Media</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="input-upload">
+                                    <% for(let i=0;i<4;i++){ %>
+                                    <img src="/upload/<%= product.productImage[i]%>" alt="">
+                                        <% } %>
+                                    <input class="form-control" type="file" name="productImage" multiple>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <div class="mb-4">
+                                    <label class="form-label">Price</label>
+                                    <input type="text" placeholder="<%= product.price %>" class="form-control"
+                                        name="productPrice" value="<%= product.price %>" required>
+                                </div>
+
+
+                                <hr>
+                               
+                            </div>
+                            <div class="card-body">
+                                <!-- <div class="row gx-2">
+                                    <div class="col-sm-6 mb-3">
+                                        <label class="form-label">Name</label>
+                                        <select class="form-select"name="category_id">
+                                           
+                                        </select>
+                                    </div>
+
+
+                                </div>  -->
+                                <div class="row gx-2">
+                                        <div class="">
+                                            <h5 class="mb-3">Categories</h5>
+                                            <select class="form-select" name="categoryname">
+                                            <%category.forEach(function(category){%>
+                                                <option  value="<%= category.name %>" > 
+                                                <%=category.name%>
+                                                </option>
+                                            
+                                            <%})%>
+                                               
+                                               
+                                            </select>
+                                        </div>
+    
+                                
+                                    </div> <!-- row.// -->
+                            </div> 
+                        </div>
+
+
+
+
+                    </div> <!-- card end// -->
+                </div>
+                </div>
+            </form>
+
+        </section>
+
+    </body>
+    <%-include("../partials/adfooter.ejs")-%>

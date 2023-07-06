@@ -1,0 +1,571 @@
+<%-include("../partials/adheader.ejs")-%>
+<style>
+    .filter-section {
+  margin-bottom: 20px;
+}
+
+.filter-section label {
+  margin-right: 10px;
+}
+
+.filter-section button {
+  margin-left: 10px;
+}
+
+</style>
+<nav>
+    <ul class="menu-aside">
+        <li class="menu-item active">
+            <a class="menu-link" href="/admin/dashboard"> <i class="icon material-icons md-home"></i>
+                <span class="text">ADMIN HOME</span>
+            </a>
+        </li>
+        <li class="menu-item has-submenu ">
+            <a class="menu-link"> <i class="icon material-icons md-shopping_bag"></i>
+                <span class="text">Products</span>
+            </a>
+            <div class="submenu">
+                <a href="/admin/addproduct">Add Product</a>
+                <a href="/admin/productlist">Product List</a>
+
+
+            </div>
+            </li>
+        <li class="menu-item ">
+            <a class="menu-link" href="/admin/orders"> <i class="icon material-icons md-shopping_cart"></i>
+                <span class="text">Orders</span>
+            </a>
+
+        </li>
+        <li class="menu-item ">
+            <a class="menu-link" href="/admin/banner"> <i class="icon material-icons md-shopping_cart"></i>
+                <span class="text">Banner</span>
+            </a>
+
+        </li>
+        <li class="menu-item ">
+            <a class="menu-link" href="/admin/categorydisplay"> <i
+                    class="icon material-icons md-shopping_cart"></i>
+                <span class="text">Category</span>
+            </a>
+
+        </li>
+    </li>
+    <li class="menu-item has-submenu">
+        <a class="menu-link" href="#" ><i class="icon material-icons md-local_offer"></i>
+            <span class="text">Coupon</span>
+        </a>
+        <div class="submenu">
+            <a href="/admin/couponList">Coupon List</a>
+            <a href="/admin/addcoupon">Add Coupon</a>
+        </div>
+    </li>
+        <li class="menu-item has-submenu">
+            <a class="menu-link" href=""> <i class="icon material-icons md-store"></i>
+                <span class="text">Users</span>
+            </a>
+            <div class="submenu">
+                <a href="/admin/users">UserList</a>
+
+            </div>
+
+        </li>
+        
+
+        <li class="menu-item has-submenu">
+            <a class="menu-link" href="#"> <i class="icon material-icons md-person"></i>
+                <span class="text">Account</span>
+            </a>
+            <div class="submenu">
+                <a href="/admin">User login</a>
+                <a href="/admin/adregister">User registration</a>
+                <a href="/admin/error">Error 404</a>
+            </div>
+        </li>
+        <li class="menu-item has-submenu active">
+            <a class="menu-link" href="page-products-list.html"> <i class="icon material-icons md-shopping_bag"></i>
+                <span class="text">Offers</span>
+            </a>
+            <div class="submenu">
+                <a href="/admin/offer" class="active">Product Offer</a>
+                <!-- <a href="/admin/categoryOffer">Category Offer</a> -->
+            </div>
+        </li>
+
+
+
+    </ul>
+    <hr>
+    <ul class="menu-aside">
+        <li class="menu-item has-submenu">
+            <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
+                <span class="text">Settings</span>
+            </a>
+            <div class="submenu">
+                <a href="page-settings-1.html">Setting sample 1</a>
+                <a href="page-settings-2.html">Setting sample 2</a>
+            </div>
+        </li>
+
+    </ul>
+    <br>
+    <br>
+</nav>
+   
+ </aside>
+ <main class="main-wrap">
+<section class="content-main">
+    <div class="content-header">
+        <div>
+            <h2 class="content-title card-title">Dashboard </h2>
+             <p>Whole data about your business here</p> 
+        </div>
+        <div>
+            <a href="/admin/ExcelSalesData" class="btn btn-primary"><i class="text-muted material-icons md-post_add"></i>Create report</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="card card-body mb-4">
+                <article class="icontext">
+                    <span class="icon icon-sm rounded-circle bg-primary-light"><i class="text-primary material-icons md-monetization_on"></i></span>
+                    <div class="text">
+                        <h6 class="mb-1 card-title">Revenue</h6>
+                        <span>  Rs.<span id="amount"><%= revenue[0].total %></span></span>
+                        <span class="text-sm">
+                            Shipping fees are not included
+                        </span>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="card card-body mb-4">
+                <article class="icontext">
+                    <span class="icon icon-sm rounded-circle bg-success-light"><i class="text-success material-icons md-local_shipping"></i></span>
+                    <div class="text">
+                        
+                            Excluding orders in transit
+                        </span>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="card card-body mb-4">
+                <article class="icontext">
+                    <span class="icon icon-sm rounded-circle bg-warning-light"><i class="text-warning material-icons md-qr_code"></i></span>
+                    <div class="text">
+                        <h6 class="mb-1 card-title">Products</h6> <span><%=product%></span>
+                        <span class="text-sm">
+                            In 2 Categories
+                        </span>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="card card-body mb-4">
+                <article class="icontext">
+                    <span class="icon icon-sm rounded-circle bg-info-light"><i class="text-info  material-icons md-person"></i></span>
+                    <div class="text">
+                        <h6 class="mb-1 card-title">Number of users</h6> <span><%=user%></span>
+                       
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-8 col-lg-12">
+            <div class="card mb-4">
+                <article class="card-body">
+                    <h5 class="card-title">Sale Statistics</h5>
+                    <canvas id="myChart" height="120px"></canvas>
+                </article>
+            </div>
+            
+        </div>
+        <div class="col-xl-4 col-lg-12">
+            <div class="card mb-4">
+                <article class="card-body">
+                    <h5 class="card-title">Revenue Base on Monthly sale</h5>
+                    <canvas id="myChart2" height="217"></canvas>
+                </article>
+            </div>
+
+        </div>
+        </div>
+    </div>
+    <header class="card-header">
+        <!-- Filter options can be added here if needed -->
+        <div style="padding-left: 30px; padding-right: 30px;">
+
+            <div class="container-fluid p-0">
+              <div class="row">
+                <div class="col-md-12 d-flex justify-content-end">
+                  <div class="me-2">
+                  
+
+                    <div class="me-2">
+                        <button type="button" id="btn-print-this" class="btn btn-secondary btn-icon bg-dark">
+                          <i class="bi bi-file-earmark-pdf-fill"></i> PDF
+                        </button>
+                      
+                        <button type="button" onclick="convertTableToExcel()" class="btn btn-secondary btn-icon bg-dark">
+                          <i class="bi bi-file-earmark-excel-fill"></i> Excel
+                        </button>
+                      </div>
+                      
+                  </div>
+                </div>
+      
+    </header>
+    <div class="card-body">
+        <div class="filter-section">
+            <label for="from-date">From Date:</label>
+            <input type="date" id="from-date" name="from-date">
+            
+            <label for="to-date">To Date:</label>
+            <input type="date" id="to-date" name="to-date">
+            
+            <button id="filter-btn">Filter</button>
+            <button id="reset-btn">Reset</button>
+          </div>
+                
+                <div class="table-responsive">
+                    <table id="table1" class="table align-middle table-nowrap mb-0">
+
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col" class="text-center">
+                                    <div class="form-check align-middle">
+                                        <input class="form-check-input" type="checkbox" id="transactionCheck01">
+                                        <label class="form-check-label" for="transactionCheck01"></label>
+                                    </div>
+                                </th>
+                                <th class="align-middle" scope="col">Order ID</th>
+                                <th class="align-middle" scope="col">Billing Name</th>
+                                <th class="align-middle" scope="col">Date</th>
+                                <th class="align-middle" scope="col">Total</th>
+                                <th class="align-middle" scope="col">Payment Status</th>
+                                <th class="align-middle" scope="col">Payment Method</th>
+                                <th class="align-middle" scope="col">View Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if(orders)  { %>
+                                  
+                                <% orders.forEach(function(order) { %>  
+                                   <tr>
+                                       <td class="text-center">
+                                           <div class="form-check">
+                                               <input class="form-check-input" type="checkbox" id="transactionCheck02">
+                                               <label class="form-check-label" for="transactionCheck02"></label>
+                                           </div>
+                                       </td>
+                                       <td><a href="#" class="fw-bold">#<%=order._id%></a> </td>
+                                       <td><%=order.userId.name%></td>
+                                       <td><%=new Date(order.orderDate).toLocaleDateString()%></td>
+                                       <td>
+                                          <%=order.total%>
+                                       </td>
+                                       <td class="action-col">
+                                        
+
+                                            <% if(order.paymentstatus == "Paid"){ %>
+                                                <a  >Paid</a>
+                                            <% }  else { %>
+                                                <a  >Unpaid</a>
+                                                
+                                            <% } %>	
+                                    </td> 
+                                       <td>
+                                           <i class="material-icons md-payment font-xxl text-muted mr-5"></i> 
+                                           <%=order.paymentMethod%> 
+                                       </td>
+                                       <td>
+                                           <a href="/admin/orderdetails?id=<%=order._id%>" class="btn btn-xs"> View details</a>
+                                       </td>
+                                   </tr>
+                                   <% }); %> 
+                                   <% } else{ %>
+                                     <h4>NO orderlist is available</h4>
+                                    <% } %>
+                               </tbody>
+                           </table>
+                          
+                        
+                </div>
+            </div> <!-- table-responsive end// -->
+        </div>
+    </div>
+    
+</section> <!-- content-main end// -->
+
+<script src="https://cdn.jsdelivr.net/npm/axios@0.21.4/dist/axios.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.slim.js"
+integrity="sha256-dWvV84T6BhzO4vG6gWhsWVKVoa4lVmLnpBOZh/CAHU4=" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<!-- <script>
+   $(document).ready(function() {
+      $('#btn-print-this').click(function() {
+         window.print();
+      });
+   });
+</script> -->
+<script>
+$(document).ready(function() {
+  $('#btn-print-this').click(function() {
+    const tableHTML = $('.table-responsive').html();
+    const popupWindow = window.open('', '_blank', 'width=600,height=600');
+    popupWindow.document.open();
+    popupWindow.document.write(`
+      <html>
+      <head>
+        <title>Print</title>
+        <style>
+          @media print {
+            body * {
+              visibility: hidden;
+            }
+            .table-popup, .table-popup * {
+              visibility: visible;
+            }
+            .table-popup {
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 100%;
+              height: 100%;
+              overflow: auto;
+            }
+          }
+        </style>
+      </head>
+      <body>
+        <div class="table-popup">
+          ${tableHTML}
+        </div>
+      </body>
+      </html>
+    `);
+    popupWindow.document.close();
+    popupWindow.print();
+  });
+});
+</script>
+
+<script>
+$(document).ready(function() {
+// Select the table and the "Total" column cells
+const table = $('#table1');
+const totalCells = table.find('tbody td:nth-child(5)'); // Assuming "Total" is the 6th column
+
+// Calculate the sum of the "Total" column
+let sum = 0;
+totalCells.each(function() {
+  const value = parseFloat($(this).text());
+  
+  // Add the value to the sum if it is a valid number
+  if (!isNaN(value)) {
+    sum += value;
+  }
+});
+
+// Add the "Total Sales" row to the table
+//   const totalRow = $('<tr>').append('<td colspan="5"><b>Total Sales</b></td><td><b>' + sum + '</b></td>');
+  const totalRow = $('<tr>').append('<td colspan="5"><b><span style="font-size: 16px;">Total Sales</span></b></td><td><b><span style="font-size: 16px;">' + sum + '</span></b></td>');
+
+table.find('tbody').append(totalRow);
+
+
+
+
+$('#filter-btn').click(function() {
+const fromDate = new Date($('#from-date').val());
+const toDate = new Date($('#to-date').val());
+
+// Hide all rows initially
+table.find('tbody tr').hide();
+
+// Filter rows based on the date range
+table.find('tbody tr').each(function() {
+const dateString = $(this).find('td:nth-child(4)').text(); // Assuming "Date" is the 4th column
+const date = moment(dateString, 'D/M/YYYY').toDate();
+console.log(date);
+if (date >= fromDate && date <= toDate) {
+$(this).show();
+}
+});
+});
+
+$('#reset-btn').click(function() {
+// Reset the date inputs and show all rows
+$('#from-date').val('');
+$('#to-date').val('');
+table.find('tbody tr').show();
+});
+
+});
+</script>
+
+
+<!-------------------------- CONVERTING TABLE TO EXCEL---------- -->
+
+<script>
+function convertTableToExcel() {
+// Select the table element
+const table = document.getElementById('table1');
+
+// Prepare data array
+const data = [];
+
+// Add table headers to the data array
+const headers = [];
+for (let i = 0; i < table.rows[0].cells.length; i++) {
+  
+  headers.push(table.rows[0].cells[i].textContent);
+  
+}
+data.push(headers);
+
+// Iterate through each row of the table (excluding the header row)
+for (let i = 1; i < table.rows.length; i++) {
+  const row = table.rows[i];
+  const rowData = [];
+
+  // Iterate through each cell of the row
+  for (let j = 0; j < row.cells.length; j++) {
+    rowData.push(row.cells[j].textContent);
+    
+  }
+
+  // Add row data to the data array
+  data.push(rowData);
+}
+
+// Create a new workbook
+const workBook = XLSX.utils.book_new();
+
+// Create a new worksheet
+const workSheet = XLSX.utils.aoa_to_sheet(data);
+
+// Add the worksheet to the workbook
+XLSX.utils.book_append_sheet(workBook, workSheet, 'Order Data');
+
+// Convert the workbook to a binary string
+const excelData = XLSX.write(workBook, { bookType: 'xlsx', type: 'binary' });
+
+// Save the binary string as a file
+saveAsExcelFile(excelData, 'orderData.xlsx');
+}
+
+function saveAsExcelFile(data, fileName) {
+const blob = new Blob([s2ab(data)], { type: 'application/octet-stream' });
+const url = URL.createObjectURL(blob);
+const link = document.createElement('a');
+link.href = url;
+link.download = fileName;
+link.click();
+URL.revokeObjectURL(url);
+}
+
+function s2ab(s) {
+const buf = new ArrayBuffer(s.length);
+const view = new Uint8Array(buf);
+for (let i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xff;
+return buf;
+}
+</script>
+
+
+
+
+<script>
+$(document).ready(function() {
+// Get the sales data from the server-side
+$.ajax({
+url: '/admin/getSalesData',
+method: 'GET',
+success: function(response) {
+
+
+var  categorySales = response.categorySales
+var salesData = response.salesData
+console.log(salesData);
+console.log(categorySales);
+
+// Create a function to render the chart
+function renderChart() {
+// Get the canvas element
+const canvas = document.getElementById('myChart');
+
+// Create the chart using Chart.js
+const ctx = canvas.getContext('2d');
+const myChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels:  salesData.map(data => data._id),
+    datasets: [{
+      label: 'Sales',
+      tension: 0.3,
+      fill: true,
+      backgroundColor: 'rgba(44, 120, 220, 0.2)',
+      borderColor: 'rgba(44, 120, 220)',
+      data: salesData.map(data => data.totalRevenue)
+    }]
+  },
+  options: {
+    plugins: {
+      legend: {
+        labels: {
+          usePointStyle: true
+        }
+      }
+    }
+  }
+});
+}
+// //function renderChart2() {
+// // Get the canvas element
+// //const canvas = document.getElementById('myChart2');
+
+// // Create the chart using Chart.js
+// const ctx = canvas.getContext('2d');
+// const myChart = new Chart(ctx, {
+//   type: 'bar',
+//   data: {
+//     labels:  categorySales.map(data => data._id),
+//     datasets: [{
+//       label: 'Sales',
+//       tension: 0.3,
+//       fill: true,
+//       backgroundColor: 'rgba(44, 120, 220, 0.2)',
+//       borderColor: 'rgba(44, 120, 220)',
+//       data: categorySales.map(data => data.totalSales)
+//     }]
+//   },
+  //
+
+
+// Call the renderChart function to display the chart
+renderChart();
+//renderChart2();
+},
+
+});
+});
+
+</script>
+
+
+        
+    <%-include("../partials/adfooter.ejs")-%>

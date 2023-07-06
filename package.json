@@ -1,0 +1,35 @@
+{
+  "name": "cart",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.2",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "exceljs": "^4.3.0",
+    "express": "^4.18.2",
+    "flash": "^1.1.0",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.1.1",
+    "multer": "^1.4.5-lts.1",
+    "nocache": "^3.0.4",
+    "nodemailer": "^6.9.3",
+    "nodemon": "^1.14.9",
+    "otp-generator": "^4.0.1",
+    "path": "^0.12.7",
+    "razorpay": "^1.0.0",
+    "session": "^0.1.0",
+    "twilio": "^4.11.2"
+  }
+}

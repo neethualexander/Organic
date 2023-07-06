@@ -1,0 +1,261 @@
+<%-include("../partials/adheader.ejs")-%>
+<nav>
+    <ul class="menu-aside">
+        <li class="menu-item ">
+            <a class="menu-link" href="/admin/dashboard"> <i class="icon material-icons md-home"></i>
+                <span class="text">ADMIN HOME</span>
+            </a>
+        </li>
+        <li class="menu-item has-submenu ">
+            <a class="menu-link"> <i class="icon material-icons md-shopping_bag"></i>
+                <span class="text">Products</span>
+            </a>
+            <div class="submenu">
+                <a href="/admin/addproduct">Add Product</a>
+                <a href="/admin/productlist">Product List</a>
+
+
+            </div>
+            </li>
+        <li class="menu-item ">
+            <a class="menu-link" href="/admin/orders"> <i class="icon material-icons md-shopping_cart"></i>
+                <span class="text">Orders</span>
+            </a>
+
+        </li>
+        <li class="menu-item ">
+            <a class="menu-link" href="/admin/banner"> <i class="icon material-icons md-shopping_cart"></i>
+                <span class="text">Banner</span>
+            </a>
+
+        </li>
+        <li class="menu-item ">
+            <a class="menu-link" href="/admin/categorydisplay"> <i
+                    class="icon material-icons md-shopping_cart"></i>
+                <span class="text">Category</span>
+            </a>
+
+        </li>
+        <li class="menu-item has-submenu">
+            <a class="menu-link" href="#" ><i class="icon material-icons md-local_offer"></i>
+                <span class="text">Coupon</span>
+            </a>
+            <div class="submenu">
+                <a href="/admin/couponList">Coupon List</a>
+                <a href="/admin/addcoupon">Add Coupon</a>
+            </div>
+        </li>
+        <li class="menu-item has-submenu">
+            <a class="menu-link" href=""> <i class="icon material-icons md-store"></i>
+                <span class="text">Users</span>
+            </a>
+            <div class="submenu">
+                <a href="/admin/users">UserList</a>
+
+            </div>
+
+        </li>
+        
+
+        <li class="menu-item has-submenu-active">
+            <a class="menu-link" href="#"> <i class="icon material-icons md-person"></i>
+                <span class="text">Account</span>
+            </a>
+            <div class="submenu">
+                <a href="/admin">User login</a>
+                <a href="/admin/adregister">User registration</a>
+                <a href="/admin/error">Error 404</a>
+            </div>
+        </li>
+
+
+
+    </ul>
+    <hr>
+    <ul class="menu-aside">
+        <li class="menu-item has-submenu">
+            <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
+                <span class="text">Settings</span>
+            </a>
+            <div class="submenu">
+                <a href="page-settings-1.html">Setting sample 1</a>
+                <a href="page-settings-2.html">Setting sample 2</a>
+            </div>
+        </li>
+
+    </ul>
+    <br>
+    <br>
+</nav>
+   
+</aside>
+<main class="main-wrap">
+    <header class="main-header navbar">
+        <div class="col-search">
+           
+        </div>
+       
+                
+                
+                
+                <li class="dropdown nav-item">
+                    <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownAccount"
+                        ></a>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownAccount">
+                        <a class="dropdown-item" href="#"><i class="material-icons md-perm_identity"></i>Edit
+                            Profile</a>
+                        <a class="dropdown-item" href="#"><i class="material-icons md-settings"></i>Account
+                            Settings</a>
+                        <a class="dropdown-item" href="#"><i
+                                class="material-icons md-account_balance_wallet"></i>Wallet</a>
+                        <a class="dropdown-item" href="#"><i class="material-icons md-receipt"></i>Billing</a>
+                        <a class="dropdown-item" href="#"><i class="material-icons md-help_outline"></i>Help
+                            center</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-danger" href="/admin/logout"><i
+                                class="material-icons md-exit_to_app"></i>Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <section class="content-main">
+        <div class="content-header">
+            <div>
+                <h2 class="content-title card-title">Products List</h2>
+                <p>The products available now</p>
+            </div>
+            <div>
+                <a href="#" class="btn btn-light rounded font-md">Export</a>
+                <a href="#" class="btn btn-light rounded  font-md">Import</a>
+                <a href="#" class="btn btn-primary btn-sm rounded">Create new</a>
+            </div>
+        </div>
+        <table id="product"><table head>
+            <tr>
+        <div class="card mb-4">
+            <header class="card-header">
+                <div class="row align-items-center">
+
+                    <div class="col-lg-2 col-sm-4 col-8 flex-grow-1 col-name">
+                        
+                        <div class="left"><th> <span>Product  Image</span></th></div></div>
+                    
+                    <div class="col-lg-2 col-sm-2 col-4 col-price"><th style="position: relative;left: 100px;"><span>Product Name</span></th></div>
+                    <th style="position: relative;left: 150px;"><div class="col-lg-2 col-sm-2 col-4 col-price">  <span>Price</span> </div></th>
+                    <th style="position: relative;left: 250px;"><div class="col-lg-2 col-sm-2 col-4 col-date"> <span>product quantity</span></div></th>
+                    <th style="position: relative;left: 350px;"> <div class="col-lg-2 col-sm-2 col-4 col-date"><span>category</span></div></th>
+                    <th style="position: relative;left: 450px;"><div class="col-lg-2 col-sm-2 col-4 col-action"><span>Action</span></div></th>
+
+                        </div> </tr></table head><!-- row .// -->
+                <!-- <div class="row align-items-center">
+                    <div class="col col-check flex-grow-0">
+                        <div class="form-check ms-2">
+                            <input class="form-check-input" type="checkbox" value="">
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-12 me-auto mb-md-0 mb-3">
+                        <select class="form-select">
+                            <option selected>All category</option>
+                            <option>Fish and sea food</option>
+                            <option>Poultry</option>
+                            <option>Meat</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 col-6">
+                        <input type="date" value="02.05.2021" class="form-control">
+                    </div>
+                    <div class="col-md-2 col-6">
+                        <select class="form-select">
+                            <option selected>Status</option>
+                            <option>Active</option>
+                            <option>Disabled</option>
+                            <option>Show all</option>
+                        </select>
+                    </div>
+                </div> -->
+            </header> <!-- card-header end// -->
+            <div class="card-body">
+                <%data.forEach(function(data){ %>
+                    <tr>
+                    <article class="itemlist">
+
+
+                        <div class="row align-items-center">
+
+                            <div class="col-lg-2 col-sm-4 col-8 flex-grow-1 col-name">
+                                
+                                <div class="left">
+                                    <img src="/upload/<%=data.productImage[0]%>" class="img-sm img-thumbnail">
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-2 col-sm-2 col-4 col-price"><span>
+                                
+                                    <%=data.productName%>
+                                </span></div>
+
+                            <div class="col-lg-2 col-sm-2 col-4 col-price"><span>
+                                    <%=data.price%>
+                                </span> </div>
+                                <div class="col-lg-2 col-sm-2 col-4 col-price"><span>
+                                    <%=data.productQuantity%>
+                                </span> </div>
+                                
+                                <div class="col-lg-2 col-sm-2 col-4 col-price"><span>
+                                    <%=data.category_id.name%>
+                                </span> </div>
+
+                            <!--<div class="col-lg-2 col-sm-2 col-4 col-status">
+                                <%if(data.isselected===0){%>
+                                    <span class="badge rounded-pill alert-success">Active</span>
+                                    <%} else { %>
+                                        <span class="badge rounded-pill alert-danger">InActive</span>
+                                        <% }%>
+                            </div>
+                            <div class="col-lg-2 col-sm-2 col-4 col-status">
+                                <% if(data.isselected=="Active") { %>
+                                     use ajax 
+                                    <span class="badge rounded-pill alert-danger">Not active</span>
+                                    <% }else{ %>
+                                    <span class="badge rounded-pill alert-success">active</span>
+                                    <% } %>
+                               
+                            </div>-->
+
+
+                            <div class="col-lg-2 col-sm-2 col-4 col-action">
+                                <a href="/admin/edit_product?id=<%= data._id %>" class="btn btn-sm font-sm rounded btn-brand">
+                                    <i class="material-icons md-edit"></i> Edit
+                                </a>
+
+                                    <a href="/admin/delete_product?id=<%= data._id %>" class="btn btn-sm font-sm btn-light rounded"
+                                        onclick="return confirm('Do you want to delete  <%=data.productName%> ')">
+                                 
+               
+                                    <i class="material-icons md-delete_forever"></i> Delete
+                                    </a>
+                            </div>
+
+                        </div> <!-- row .// -->
+                    </article> <!-- itemlist  .// -->
+                    </div></tr>
+                    <% })%>
+                
+
+            </div> <!-- card-body end// -->
+        </div> <!-- card end// -->
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+  
+ <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+
+
+        <script>
+            $(document).ready(function() {
+                $('.product-hover').DataTable();
+              });
+              
+            </script>
+    <%-include("../partials/adfooter.ejs")-%>

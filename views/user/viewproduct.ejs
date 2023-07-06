@@ -1,0 +1,199 @@
+<%- include('../partials/header') %>
+
+<main class="main">
+    <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+        <div class="container-fluid d-flex align-items-center">
+
+
+        
+        </div><!-- End .container-fluid -->
+    </nav><!-- End .breadcrumb-nav -->
+
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-10">
+                    <div class="product-details-top">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-7">
+                                <div class="product-gallery">
+                                   
+                                    <% if (data) { %>	
+                                    <figure class="product-main-image">
+                                    
+                                        <img id="product-zoom" src="upload/<%= data.productImage[0] %>" data-zoom-image="upload/<%= data.productImage[0] %>" alt="product image">
+
+                                        <a href="#" id="btn-product-gallery" class="btn-product-gallery">
+                                            <i class="icon-arrows"></i>
+                                        </a>
+                                    </figure><!-- End .product-main-image -->
+                                    <div id="product-zoom-gallery" class="product-image-gallery max-col-6">
+                                        <%for(let i=0;i<data.productImage.length;i++){ %>
+                                        <a class="product-gallery-item" href="upload/<%=data.productImage[i] %>" data-image="upload/<%=data.productImage[i] %>" data-zoom-image="upload/<%=data.productImage[i] %>">
+                                            <img src="upload/<%=data.productImage[i] %>" alt="product side,product cross,product with model">
+                                        </a>
+                                       <%}%>
+
+                                      
+
+                                    </div><!-- End .product-image-gallery -->
+                                </div><!-- End .product-gallery -->
+                                
+                                    
+                            </div><!-- End .col-lg-7 -->
+
+                            <div class="col-md-6 col-lg-5">
+                                <div class="product-details">
+                                    <h1 class="product-title"><%=data.productName%></h1><!-- End .product-title -->
+
+                                    <div class="ratings-container">
+                                        <div class="ratings">
+                                            <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
+                                        </div><!-- End .ratings -->
+                                        <a class="ratings-text" href="#product-accordion" id="review-link">( 2 Reviews )</a>
+                                    </div><!-- End .rating-container -->
+
+                                    <div class="product-price">
+                                        <span class="new-price">Rs.<%= data.price %></span>
+                                        <!-- <span class="old-price">$110.00</span> -->
+                                    </div><!-- End .product-price -->
+
+                                    <div class="product-content">
+                                        <p><%= data.productDes%> </p>
+                                    </div><!-- End .product-content -->
+
+                                    <div class="details-filter-row details-row-size">
+                                      
+
+                                    </div><!-- End .details-filter-row -->
+
+                                    <div class="details-filter-row details-row-size">
+                                        
+                                    </div><!-- End .details-filter-row -->
+
+                                    <div class="details-filter-row details-row-size">
+                                        <label for="qty">Qty:</label>
+                                        <div class="product-details-quantity">
+                                            <input type="number" id="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
+                                        </div><!-- End .product-details-quantity -->
+                                    </div><!-- End .details-filter-row -->
+
+                                    <div class="product-details-action">
+                                        <a href="#"  data-proid="<%=data.id%>" class="addtocartbutton btn-product btn-cart"><span>add to cart</span></a>
+
+                                        <div class="details-action-wrapper">
+                                            <a href="#" data-wishlist="<%=data.id%>" class="addtowishlist btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
+                                            
+                                        </div><!-- End .details-action-wrapper -->
+                                    </div><!-- End .product-details-action -->
+
+                                    
+                                
+                                            <div id="product-accordion-info" class="collapse" aria-labelledby="product-info-heading" data-parent="#product-accordion">
+                                                <div class="card-body">
+                                                    <div class="product-desc-content">
+                                                        <!-- <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. </p> -->
+
+                                                        
+
+                                                       
+                                        
+                                        
+                                            
+                                                     
+                                                                </div><!-- End .col-auto -->
+                                                            </div><!-- End .row -->
+                                                        </div><!-- End .review -->
+                                                    </div><!-- End .reviews -->
+                                                </div><!-- End .card-body -->
+                                            </div><!-- End .collapse -->
+                                        </div><!-- End .card -->
+                                    </div><!-- End .accordion -->
+                                </div><!-- End .product-details -->
+                            </div><!-- End .col-lg-5 -->
+                        </div><!-- End .row -->
+                    </div><!-- End .product-details-top -->
+                </div><!-- End .col-xl-10 -->
+                <% } else { %>
+                    <h1>Something went worng</h1>
+                     <% } %>
+                
+            </div><!-- End .row -->
+
+        </div><!-- End .container-fluid -->
+    </div><!-- End .page-content -->
+</main><!-- End .main -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.slim.js" integrity="sha256-dWvV84T6BhzO4vG6gWhsWVKVoa4lVmLnpBOZh/CAHU4=" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+<script>
+  $(".addtocartbutton").click(function () {
+    console.log("button clicked");
+    let productid = $(this).data('proid');
+    console.log(productid);
+    $.ajax({
+      url: "/addtocart?id=" + productid,
+      type: "GET",
+      success: function (response) {
+       if(response.message == "1"){
+        console.log('response is back');
+        Swal.fire({
+        
+                  title: "success",
+                  text: "Item is alerady add to cart",        
+                  icon: "info",
+                  confirmButtonText: "OK"
+                 }); 
+
+       }else{
+        console.log('response is back');
+        Swal.fire({
+                  title: "success",
+                  text: "added to cart",        
+                  icon: "success",
+                  confirmButtonText: "OK"
+                 }); 
+       }
+      }
+    });
+  });
+
+  
+  // whishlist script
+  $(".addtowishlist").click(function () {
+              console.log("button clicked");
+              let productid = $(this).data("wishlist");
+              console.log(productid);
+          
+              $.ajax({
+                url: "/addtowishlist?id=" + productid,
+                type: "GET",
+                success: function (response) {
+                  if(response.message == "1"){
+                  console.log('response is back');
+                  Swal.fire({
+                  
+                            title: "success",
+                            text: "Item is alerady add to wishlist",        
+                            icon: "info",
+                            confirmButtonText: "OK"
+                           }); 
+          
+                 }else{
+                  console.log('response is back');
+                  Swal.fire({
+                            title: "success",
+                            text: "added to wishlist",        
+                            icon: "success",
+                            confirmButtonText: "OK"
+                           }); 
+                 }
+                }
+                
+              });
+            });
+
+
+</script>
+<%- include('../partials/footer') %>

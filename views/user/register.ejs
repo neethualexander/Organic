@@ -1,0 +1,152 @@
+<%- include('../partials/header') %>
+
+        <main class="main">
+            <div class="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17" style="background-image: url('assets/images/demos/demo-4/slider/seafood.jpg')">
+            	<div class="container">
+            		<div class="form-box">
+            			<div class="form-tab">
+	            			<ul class="nav nav-pills nav-fill" role="tablist">
+							   
+							    <li class="nav-item">
+							        <a class="nav-link active">Register</a>
+							    </li>
+							</ul>
+							<div class="tab-content">
+							    <div class="show active" role="tabpanel" aria-labelledby="register-tab-2">
+							    	<form action="/register" method="post">
+                                        <div class="form-group">
+							    			<label for="register-email-2">Name *</label>
+							    			<input type="text"  class="form-control" id="name" name="name" >
+											<span class="text-danger" id="name-valid"></span>
+							    		</div>
+							    		<div class="form-group">
+							    			<label for="register-email-2">Your email address *</label>
+							    			<input type="email" class="form-control" id="email" name="email" >
+											<span class="text-danger" id="email-valid"></span>
+
+							    		</div><!-- End .form-group -->
+                                        <div class="form-group">
+							    			<label for="register-email-2">Your Phone number *</label>
+							    			<input type="text" class="form-control" id="register-" name="phone" required>
+											
+							    		</div>
+
+							    		<div class="form-group">
+							    			<label for="register-password-2">Password *</label>
+							    			<input type="password" class="form-control"id="password" name="password">
+											<!-- <i  class="togglePassword far fa-eye" style="margin-left: 10px; cursor: pointer;"></i> -->
+											<span class="text-danger" id="password-valid"></span>
+
+							    		</div><!-- End .form-group -->
+										<div class="form-group">
+							    			<label for="register-password-2"> Conform Password *</label>
+							    			<input type="password" class="form-control"id="confirm-password" >
+											<!-- <i class="togglePassword far fa-eye"  style="margin-left: 10px; cursor: pointer;"></i> -->
+											<span class="text-danger" id="confirm-password-valid"></span>
+
+							    		</div><!-- End .form-group -->
+
+							    		<div class="form-footer">
+							    			<button id="signup-form"   class="btn btn-outline-primary-2">
+			                					<span>SIGN UP</span>
+			            						<i class="icon-long-arrow-right"></i>
+			                				</button>
+
+			                				
+							    		</div><!-- End .form-footer -->
+							    	</form>
+							    	
+							    </div><!-- .End .tab-pane -->
+							</div><!-- End .tab-content -->
+						</div><!-- End .form-tab -->
+            		</div><!-- End .form-box -->
+            	</div><!-- End .container -->
+            </div><!-- End .login-page section-bg -->
+        </main><!-- End .main -->
+
+    
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+
+		<script src="https://code.jquery.com/jquery-3.7.0.slim.js" integrity="sha256-7GO+jepT9gJe9LB4XFf8snVOjX3iYNb0FHYr5LI1N5c=" crossorigin="anonymous"></script>
+
+    <% if (locals.title) { %>
+        <script>
+         Swal.fire({
+               title: "Error",
+                text: '<%=title%>' ,
+                icon: "error",
+                confirmButtonText: "OK"
+               })
+        </script>
+      <% } %>
+<script>
+
+	
+// form validition
+$(document).ready(function() {
+
+  $('#signup-form').on('click', function(e) {
+	  event.preventDefault();
+
+    var name = $('#name').val();
+    var email = $('#email').val();
+    var password = $('#password').val();
+    var confirmPassword = $('#confirm-password').val();
+
+    if (name.trim() === '') {
+      $('#name-valid').text('Name is required');
+      return;
+    }else if($.isNumeric(name)){
+		$('#name-valid').text('Name should not be a number');
+		return;
+	}
+
+    if (email.trim() === '') {
+      $('#email-valid').text('Email is required');
+      return;
+    } else if (!isValidEmail(email)) {
+      $('#email-valid').text('Invalid email format');
+      return;
+    }
+
+    if (password.trim() === '') {
+      $('#password-valid').text('Password is required');
+      return;
+    } else if (password.length < 6) {
+      $('#password-valid').text('Password must be at least 6 characters');
+      return;
+    }
+
+    if (confirmPassword.trim() === '') {
+      $('#confirm-password-valid').text('Confirm Password is required');
+      return;
+    } else if (confirmPassword !== password) {
+      $('#confirm-password-valid').text('Passwords do not match');
+      return;
+    }
+
+
+     // Submit the form
+	 $('#signup-form').off('click').trigger('submit');
+
+  });
+
+  // Other validation functions and form validation logic
+});
+
+// Function to check if an email is in a valid format
+function isValidEmail(email) {
+  var emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  return emailPattern.test(email);
+}
+
+
+
+
+</script>
+
+
+    

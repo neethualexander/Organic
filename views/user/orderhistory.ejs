@@ -1,0 +1,237 @@
+<%- include('../partials/header') %>
+	
+	<main class="main">
+		<div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+			<div class="container">
+				<h1 class="page-title">My Account<span>Shop</span></h1>
+			</div><!-- End .container -->
+		</div><!-- End .page-header -->
+		<nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
+			<div class="container">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="/">Home</a></li>
+					<li class="breadcrumb-item"><a href="/profile">Profile</a></li>
+					<li class="breadcrumb-item active" aria-current="page">My Account</li>
+				</ol>
+			</div><!-- End .container -->
+		</nav><!-- End .breadcrumb-nav -->
+
+		
+
+
+	<div class="col-md-8 col-lg-10">
+		<div class="tab-content">
+		<section class="content-main">
+	<div class="content-header">
+	<div>
+<h2 class="content-title card-title">Order Details</h2>
+			<p>Details for Order ID: #<%=order._id.toString().slice(-4)%></p>
+								</div>
+									</div>
+									<div class="card">
+										<header class="card-header">
+											<div class="row align-items-center">
+												<div class="col-lg-6 col-md-6 mb-lg-0 mb-15">
+													<span>
+														<i class="material-icons md-calendar_today"></i>
+														<b><%- order.orderDate.toLocaleString("en-US", {
+																weekday: 'short' , month: 'short' , day: 'numeric' ,
+																year: 'numeric' , hour: 'numeric' , minute: 'numeric' ,
+																hour12: true }) %>
+														</b>
+													</span> <br>
+													<small class="text-muted">Order ID: #<%=order._id%></small>
+												</div>
+
+											</div>
+										</header> <!-- card-header end// -->
+										<div class="card-body">
+											<div class="row mb-50 mt-20 order-info-wrap">
+												<div class="col-md-4">
+													<article class="icontext align-items-start">
+														<span class="icon icon-sm rounded-circle bg-primary-light">
+															<i class="text-primary material-icons md-person"></i>
+														</span>
+														<div class="text">
+															<h6 class="mb-1">Customer</h6>
+															<p class="mb-1">
+																<%=order.userId.name%> <br>
+																	<%=order.userId.email%> <br>
+																		<%=order.userId.phone%>
+															</p>
+															<!-- <a href="#">View profile</a> -->
+														</div>
+													</article>
+												</div> <!-- col// -->
+												<div class="col-md-4">
+													<article class="icontext align-items-start">
+														<span class="icon icon-sm rounded-circle bg-primary-light">
+															<i
+																class="text-primary material-icons md-local_shipping"></i>
+														</span>
+														<div class="text">
+															<h6 class="mb-1">Order info</h6>
+															<p class="mb-1">
+																Shipping: Fargo express <br> Pay method: card <br>
+																Status: new
+															</p>
+															<!-- <a href="#">Download info</a> -->
+														</div>
+													</article>
+												</div> <!-- col// -->
+												<div class="col-md-4">
+													<article class="icontext align-items-start">
+														<span class="icon icon-sm rounded-circle bg-primary-light">
+															<i class="text-primary material-icons md-place"></i>
+														</span>
+														<div class="text">
+															<h6 class="mb-1">Deliver to</h6>
+															<p class="mb-1">
+																City: <%=order.address.city%>,
+																	<%=order.address.State%>
+																		<br>
+																		<%=order.address.address1%>
+																			<br> Pin: <%=order.address.zipcode%>
+															</p>
+															<!-- <a href="#">View profile</a> -->
+														</div>
+													</article>
+												</div> <!-- col// -->
+											</div> <!-- row // -->
+											<div class="row">
+												<div class="col-lg-7">
+													<div class="table-responsive">
+														<table class="table">
+															<thead>
+																<tr>
+																	<th width="20%">Product</th>
+																	<th width="20%">Name</th>
+																	<th width="20%">Unit Price</th>
+																	<th width="20%">Quantity</th>
+																	<th width="20%">Status</th>
+																	<th width="20%" class="text-end">Total</th>
+																</tr>
+															</thead>
+															<tbody>
+																<% order.product.forEach(function(product) { %>
+																	<tr>
+																		<td>
+																			<div class="product">
+																				<figure class="product-media">
+																					<a href="#">
+																						<!-- /productView?id=<%=product.product_id%> -->
+																						<% if
+																							(product.product_id.productImage
+																							) { %>
+																							<img src="upload/<%=product.product_id.productImage[0] %>"
+																								class="product-image"
+																								alt="It" width="50px" />
+																							<% } else { %>
+																								<img src="upload/img.webp"
+																									alt="Default Image"
+																									class="product-image" />
+																								<% } %>
+
+																				</figure>
+																			</div>
+																		</td>
+																		<td>
+																			<div class="info">
+																				<%=product.product_id.productname %>
+																			</div>
+																		</td>
+																		<td> ₹ <%=product.product_id.price %>
+																		</td>
+																		<td>
+																			<%=product.quantity %>
+																		</td>
+																		<td>
+																			<%=order.status %>
+																		</td>
+																		<td class="text-end"> ₹
+																			<%=product.product_id.price*product.quantity
+																				%>.00
+																		</td>
+																	</tr>
+																	<%})%>
+																		<tr>
+																			<td colspan="5">
+																				<article class="float-end"style="position: relative;left:50px;">
+																					<dl class="dlist">
+																						<dt>Subtotal:</dt>
+																						<dd>₹
+																							<%=order.total%>
+																								.00
+																						</dd>
+																					</dl>
+																					<dl class="dlist">
+																						<dt>Shipping cost:</dt>
+																						<dd>₹ 0.00</dd>
+																					</dl>
+																					<dl class="dlist">
+																						<dt>Grand total:</dt>
+																						<dd> <b class="h5">₹
+																								<%=order.total%>
+																									.00
+																							</b> </dd>
+																					</dl>
+																					<dl class="dlist">
+																						<dt class="text-muted">Status:
+																						</dt>
+																						<%if(order.paymentstatus=="Paid"
+																							) {%>
+																							<dd>
+																								<span
+																									class="badge rounded-pill alert-success text-white">Payment
+																									done</span>
+																							</dd>
+																							<%} else { %>
+																								<dd>
+																									<span
+																										class="badge rounded-pill alert-danger text-white">Payment
+																										Pending</span>
+																								</dd>
+																								<% } %>
+																					</dl>
+																				</article>
+																			</td>
+																		</tr>
+															</tbody>
+														</table>
+													</div> <!-- table-responsive// -->
+												</div> <!-- col// -->
+												<div class="col-lg-1"></div>
+												<div class="col-lg-4">
+													<br><br>
+													<div class="box shadow-sm bg-light">
+														<h6 class="">Payment info</h6>
+														<p>
+															<%=order.paymentMethod %>
+														</p>
+														<h6 class="">Payment status</h6>
+														<% if (order.paymentstatus=="Return" ) { %>
+															<span class="badge rounded-pill alert-danger">Refund</span>
+															<% } else if (order.paymentstatus=="Paid" ) { %>
+																<span
+																	class="badge rounded-pill alert-success text-white">Paid</span>
+																<%} else { %>
+																	<span
+																		class="badge rounded-pill alert-danger text-white">Unpaid</span>
+																	<% } %>
+													</div>
+													
+												</div> 
+											</div>
+										</div> <!-- card-body end// -->
+									</div> <!-- card end// -->
+								</section> <!-- content-main end// -->
+
+
+
+
+
+
+
+							
+
+	<%- include('../partials/footer') %>
