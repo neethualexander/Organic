@@ -5,7 +5,7 @@ const path=require('path')
 const adminController =require('../controller/adminContoller')
 
 admin_Router.set('view engine','ejs')
-admin_Router.set('views','./views/Admin')
+admin_Router.set('views','./views/admin')
 const bodyParser = require('body-parser')
 admin_Router.use(express.static('public'))
 admin_Router.use(bodyParser.json())
