@@ -6,7 +6,7 @@ require("dotenv").config()
 
 const {dbconnect} = process.env;
 
-mongoose.connect(dbconnect,{
+mongoose.connect(process.env.dbconnect,{
   useNewUrlParser:true,
   useUnifiedTopology:true
 })
