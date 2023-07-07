@@ -1,19 +1,26 @@
+const express=require('express')
+const app=express()
 const mongoose=require('mongoose')
 const flash=require('connect-flash');
-
 require("dotenv").config()
-mongoose.connect(process.env.dbconnect,{useNewUrlParser:true})
+
+const {dbconnect} = process.env;
+
+mongoose.connect(dbconnect,{
+  useNewUrlParser:true,
+  useUnifiedTopology:true
+})
 .then(()=>{
     console.log('mongodb connected');
 }).catch(()=>{
     console.log('failed to connect');
 })
+  
 
 
 
-const express=require('express')
 const session = require('express-session');
-const app=express()
+
 
 app.use(
     session({
