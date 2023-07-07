@@ -16,6 +16,9 @@ const cookieParser=require("cookie-parser")
 const Razorpay=require('razorpay')
 const Wallet = require("../model/walletmodel");
 const Banner = require('../model/banner');
+const adminRouter=require('../router/adminRouter')
+
+
 
 
 
@@ -100,6 +103,19 @@ user_Router.get('/deletewishlistitem',cartController.delete_wishlist);
 user_Router.post('/razorpay',cartController.createOrder);
 //user_Router.get('/ordersuccess',cartController.ordersuccess_page);
 
+user_Router.use('/admin', adminRouter);
 
+user_Router.use((req, res, next) => {
+    const error = new Error('Page not found');
+    error.status = 404;
+    next(error);
+  });
+  
+  // Error handling middleware to display the error message
+  user_Router.use((error, req, res, next) => {
+    const status = error.status || 500;
+    const message = error.message || 'Something went wrong';
+    res.status(status).render('error', { error: message });
+  });
 
 module.exports = user_Router

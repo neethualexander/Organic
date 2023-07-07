@@ -759,39 +759,39 @@ const log_out = async (req, res) => {
 const productsearch = async (req, res) => {
   try {
     const searchname = req.body.searchname.toLowerCase().trim();
-    const usersession = req.session.user_id;
+    const userid = req.session.user_id;
 
-    const data = await collection.findOne({ email: usersession });
+    const data = await User.findOne({ _id: userid});
   
     const page = parseInt(req.query.page) || 1;
-    const productsPerPage = 10; // Define the number of products to display per page
-    const totalProducts = await product.countDocuments({ productname: { $regex: searchname, $options: 'i' } });
-    const category = await categorymodel.find({});
-    const offers = await offerModel.find({});
-    const products = await product.aggregate([
+    const productsPerPage = 4; // Define the number of products to display per page
+    const totalProducts = await Product.countDocuments({ productname: { $regex: searchname, $options: 'i' } });
+    const category = await Category.find({});
+    
+    const products = await Product.aggregate([
       { $match: { productname: { $regex: searchname, $options: 'i' } } },
       { $skip: (page - 1) * productsPerPage },
       { $limit: productsPerPage }
     ]);
 
     if (products.length === 0) {
-      res.render('product1', {
-        model: '1',
+      res.render('product', {
+        
         products: products,
         category: category,
         user: req.session.user_id,
         currentPage: page,
-        offers: offers,
+       
         totalPages: Math.ceil(totalProducts / productsPerPage)
       });
     } else {
-      res.render('product1', {
-        model: '1',
+      res.render('product', {
+        
         products: products,
         category: category,
         user: req.session.user_id,
         currentPage: page,
-        offers: offers,
+        
         totalPages: Math.ceil(totalProducts / productsPerPage)
       });
     }
