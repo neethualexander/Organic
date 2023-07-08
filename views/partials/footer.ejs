@@ -334,13 +334,13 @@ $.ajax({
    console.log(response.product);
   if(response.message == "product avilable"){
     const dropdownMenu = $(".dropdown-menu");
-    dropdownMenu.empty(); 
+    dropdownMenu.empty();
     response.product.forEach(function (product) {
       const productHTML = `
         <div class="product">
           <div class="product-cart-details">
             <h4 class="product-title">
-              <a class="" href="/viewproduct?id=${product.slug}"><small>${product.productName}</small></a>
+              <a href="/viewproduct?id=${product._id}"><small>${product.productName}</small></a>
             </h4>
             <span class="cart-product-info">Rs.${product.price}</span>
           </div>
@@ -352,7 +352,7 @@ $.ajax({
         </div>
       `;
       dropdownMenu.append(productHTML); 
-    });
+       });
   }
     }
    

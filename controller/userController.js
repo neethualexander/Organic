@@ -517,8 +517,22 @@ const Category_page = async(req,res)=>{
       }
       const limit = 4;
   
-      const product_data = await Product.find({}).populate('category_id').limit(limit * 1).skip((page - 1) * limit).exec();
-      const count = await Product.find({}).populate('category_id').countDocuments();
+      const product_data = await Product.find({
+        $or:[
+          {productName:{$regex: '.*'+search+'.*',$options:'i'}},
+          {productColor:{$regex: '.*'+search+'.*',$options:'i'}},
+          {price:{$regex: '.*'+search+'.*',$options:'i'}},
+  
+        ]
+      }).populate('category_id').limit(limit * 1).skip((page - 1) * limit).exec();
+      const count = await Product.find({
+        $or:[
+          {productName:{$regex: '.*'+search+'.*',$options:'i'}},
+          {productColor:{$regex: '.*'+search+'.*',$options:'i'}},
+          {price:{$regex: '.*'+search+'.*',$options:'i'}},
+  
+        ]
+      }).populate('category_id').countDocuments();
       const cate=await Category.find({})
   const session=req.session.user_id;
       if(product_data){
@@ -538,7 +552,7 @@ const Category_page = async(req,res)=>{
 const load_viewproduct = async (req, res) => {
   try {
     const slugid = req.query.id;
-    
+    console.log(slugid);
     const session=req.session.user_id;
     const productdata = await Product.findOne({ _id: slugid }).populate('category_id');
     
@@ -739,7 +753,7 @@ const update_password = async (req, res) => {
     let session=null;
  res.status(404).render('error',{error:error.message,session}) 
   }
-};
+}
 
 //  LOGOUT........................
 
@@ -753,59 +767,32 @@ const log_out = async (req, res) => {
     let session=null;
  res.status(404).render('error',{error:error.message,session}) 
   }
-};
+}
 // This search method for the  userheader search icon  where user can search product base name,color and also can include price,
 // when product dynamically shown user can click the product, it redirect to single product page where can view product deatils
-const productsearch = async (req, res) => {
+const search_product = async(req,res)=>{
   try {
-    const searchname = req.body.searchname.toLowerCase().trim();
-    const userid = req.session.user_id;
-
-    const data = await User.findOne({ _id: userid});
+  const search = req.body.text;
+    const product_data = await Product.find({
+      $or:[
+        {productName:{$regex: '.*'+search+'.*',$options:'i'}},
+        //{productColor:{$regex: '.*'+search+'.*',$options:'i'}},
+        // {price:{$regex: '.*'+search+'.*',$options:'i'}},
   
-    const page = parseInt(req.query.page) || 1;
-    const productsPerPage = 4; // Define the number of products to display per page
-    const totalProducts = await Product.countDocuments({ productname: { $regex: searchname, $options: 'i' } });
-    const category = await Category.find({});
-    
-    const products = await Product.aggregate([
-      { $match: { productname: { $regex: searchname, $options: 'i' } } },
-      { $skip: (page - 1) * productsPerPage },
-      { $limit: productsPerPage }
-    ]);
-
-    if (products.length === 0) {
-      res.render('product', {
-        
-        products: products,
-        category: category,
-        user: req.session.user_id,
-        currentPage: page,
-       
-        totalPages: Math.ceil(totalProducts / productsPerPage)
-      });
-    } else {
-      res.render('product', {
-        
-        products: products,
-        category: category,
-        user: req.session.user_id,
-        currentPage: page,
-        
-        totalPages: Math.ceil(totalProducts / productsPerPage)
-      });
+      ]
+    })
+    if(product_data.length > 0){
+      res.send({message:"product avilable",product: product_data})
+    }else{
+      res.send( {message:"product not found"})
+  
     }
-  
   } catch (error) {
-   
-    
     let session=null;
- res.status(404).render('error',{error:error.message,session}) 
+    res.render('error',{error:error.message,session})
+    
   }
-  
-  
-  }
-  
+}
 
 
 
@@ -838,7 +825,7 @@ add_newuser,
   forgot_page,
   configmobotp,
   mobverify,
-  productsearch,
+search_product,
   home_productpage
  
 

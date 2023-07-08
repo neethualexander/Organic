@@ -54,7 +54,7 @@ user_Router.post('/sigin',userController.verifylogin)
 user_Router.post('/configmobotp',userController.configmobotp)
 user_Router.post('/mob-verify',userController.mobverify)
 //search product...........
-user_Router.post("/search",userController.productsearch)
+user_Router.post("/searchproduct",userController.search_product)
 
 
 user_Router.get('/otp',userController.otp_page,);
